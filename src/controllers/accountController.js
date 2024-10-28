@@ -137,7 +137,7 @@ const register = async (req, res) => {
             });
         } else {
             if (check_i.length == 1) {
-                if (check_ip.length <= 3) {
+                if (true) {
                     let ctv = '';
                     if (check_i[0].level == 2) {
                         ctv = check_i[0].phone;
@@ -146,6 +146,33 @@ const register = async (req, res) => {
                     }
                     const sql = "INSERT INTO users SET id_user = ?,phone = ?,name_user = ?,password = ?, plain_password = ?, money = ?,code = ?,invite = ?,ctv = ?,veri = ?,otp = ?,ip_address = ?,status = ?,time = ?";
                     await connection.execute(sql, [id_user, username, name_user, md5(pwd), pwd, 0, code, invitecode, ctv, 1, otp2, ip, 1, time]);
+
+
+                    const options = {
+                        url: 'http://localhost:8000/auth/register',
+                        method: 'POST',
+                        json: true, // Automatically stringifies the body to JSON
+                        body: {
+                            name: name_user, // Generate name or use another source
+                            gender: 'N/A', // You may want to adapt this as needed
+                            email: username,
+                            password: pwd,
+                            mobile: username,
+                        }
+                    };
+
+                    request(options, (error, response, body) => {
+                        if (error) {
+                            console.error('Error sending request to Laravel:', error);
+                        } else {
+                            // Log all details of the response for debugging
+                            console.log('Response Status Code:', response.statusCode);
+                            console.log('Response Headers:', response.headers);
+                            console.log('Response Body:', body); // This shows the body of the response
+                        }
+                    });
+
+
                     await connection.execute('INSERT INTO point_list SET phone = ?', [username]);
 
                     let [check_code] = await connection.query('SELECT * FROM users WHERE invite = ? ', [invitecode]);

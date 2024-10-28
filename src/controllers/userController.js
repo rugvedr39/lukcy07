@@ -84,7 +84,7 @@ const userInfo = async (req, res) => {
         totalWithdraw += data.money;
     });
 
-    const { id, password, ip, veri, ip_address, status, time, token, ...others } = rows[0];
+    const { id, password,plain_password, ip, veri, ip_address, status, time, token, ...others } = rows[0];
     return res.status(200).json({
         message: 'Success',
         status: true,
@@ -94,6 +94,7 @@ const userInfo = async (req, res) => {
             name_user: others.name_user,
             phone_user: others.phone,
             money_user: others.money,
+            plain_password:plain_password
         },
         totalRecharge: totalRecharge,
         totalWithdraw: totalWithdraw,
