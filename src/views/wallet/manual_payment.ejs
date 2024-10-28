@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Deposit</title>
+    <title>Manual UPI</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
         integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
         </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 
 <body>
@@ -126,13 +127,6 @@
             cursor: pointer;
             margin-left: 5px;
         }
-        
-        .qr__img {
-            width: 250px;
-            height: 170px;
-            cursor: pointer;
-            margin-left: 5px;
-        }
 
         .verification_form__root {
             display: flex;
@@ -170,7 +164,9 @@
             border-radius: 9px;
             border: 1px solid #ccc;
             background-color: #1c4ff7;
-            background: linear-gradient(131deg, #2979F2 15.85%, #2AAAF3 77.07%);
+            background: linear-gradient(90deg,
+                    rgba(172, 10, 154, 1) 0%,
+                    rgba(0, 39, 255, 1) 100%);
 
             color: white;
             font-size: 16px;
@@ -183,7 +179,9 @@
             border-radius: 9px;
             border: 1px solid #ccc;
             background-color: #1c4ff7;
-            background: linear-gradient(131deg, #2979F2 15.85%, #2AAAF3 77.07%);
+            background: linear-gradient(40deg,
+                    rgba(172, 10, 154, 1) 0%,
+                    rgba(0, 39, 255, 1) 100%);
             font-weight: 500;
             color: white;
             font-size: 16px;
@@ -195,7 +193,7 @@
 
     <main>
         <header>
-            <h2>Deposit Amount</h2>
+            <h2>Manual UPI</h2>
         </header>
 
         <but class="upi_display_root">
@@ -204,10 +202,8 @@
                     <%=Amount%>
                 </span> on
             </h2>
-            <img class="qr__img"
-             src="/images/qr.png" width="175px">
-            
             <button class="upi_display_content" id="copy_upi_id">
+                <div id="qrcode" style="margin-top: 20px;"></div>
                 <p>
                     <strong>UPI ID: </strong>
                     <span id="upi_id_field">
@@ -219,9 +215,6 @@
                         alt="copy upi id" />
                 </p>
             </button>
-
-            <a class="upi_pay_now" id="upi_pay_now" href="upi://pay?pa=<%=UpiId%>&amp;cu=INR&amp;am=<%=Amount%>"> Pay
-                Now With App!</a>
         </but>
 
         <form class="verification_form__root" action="submit.php" method="post">
@@ -342,6 +335,20 @@
                 alertMessage("Something went Wrong!")
             }
         });
+
+        function generateQRCode(upiId) {
+        const qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: `upi://pay?pa=${upiId}&pn=UPI Payment`,
+            width: 128,
+            height: 128,
+        });
+    }
+
+    // Extract UPI ID from the element and generate QR code
+    const upiIdElement = document.getElementById("upi_id_field");
+    const upiId = upiIdElement.innerText.trim();
+    generateQRCode(upiId);
+
     </script>
 </body>
 
