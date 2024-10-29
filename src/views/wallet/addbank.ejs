@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="robots" content="noindex,nofollow" />
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport" />
-    <title>BIG91CLUB</title>
+    <title>Lucky 07</title>
     <link rel="stylesheet" href="./index_files/index-96409872.css">
     <link rel="stylesheet" href="../index_files/index-96409872.css">
     <link href="/css/wallet/main.css" rel="stylesheet" />
     <link href="/css/wallet/chunk_2-1.css" rel="stylesheet" />
     <link href="/css/wallet/chunk_2-2.css" rel="stylesheet" />
     <link href="/css/wallet/chunk_2-3.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="/images/bitbug_favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/images/chahal.ico" type="image/x-icon" />
     <style>
         html,
         body {
@@ -29,13 +29,13 @@
         }
 
         .mian .bank[data-v-7aa0f84a] {
-            background: #0062ff;
+            background: #2b3449;
             padding: .4rem
         }
 
         .mian .bank .box[data-v-7aa0f84a] {
-            background: #00399b;
-            color: white !important;
+            background: #2b3449;
+            color: #2aaaf3;
             border-radius: .26667rem;
             padding: .4rem
         }
@@ -55,8 +55,8 @@
             height: .93333rem;
             line-height: .93333rem;
             border-radius: .13333rem;
-            border: .05333rem solid wheat;
-            color: #000000;
+            border: .05333rem solid #2aaaf3
+            background-colour: #212838;
         }
 
         .mian .bank .bank-btn .btn[data-v-7aa0f84a] {
@@ -68,8 +68,8 @@
             letter-spacing: .01333rem;
             border: none;
             border-radius: 1.06667rem;
-            /* background: -webkit-linear-gradient(top, #FAE59F 0%, #C4933F 100%); */
-            background: linear-gradient(90deg,#61a9ff 0%,#59b0ea 100%)
+            
+            background: linear-gradient(131deg, #2979F2 15.85%, #2AAAF3 77.07%);
         }
     </style>
 </head>
@@ -121,6 +121,13 @@
                             <input data-v-7aa0f84a="" type="text" placeholder="Enter Your IFSC Code" class="ipt" />
                         </div>
                     </div>
+                    <div data-v-7aa0f84a="" class="item">
+                        <div data-v-7aa0f84a="" class="lab">UPI ID</div>
+                        <div data-v-7aa0f84a="" class="input">
+                            <input data-v-7aa0f84a="" type="text" placeholder="Enter Your UPI ID" class="ipt" />
+                        </div>
+                    </div>
+                   
                     <div data-v-7aa0f84a="" class="item">
                         <div data-v-7aa0f84a="" class="lab">Phone Number</div>
                         <div data-v-7aa0f84a="" class="input">
@@ -191,8 +198,10 @@
             let name_user = $('.ipt:eq(1)').val().trim();
             let stk = $('.ipt:eq(2)').val().trim();
             let email = $('.ipt:eq(3)').val().trim();
-            let tinh = $('.ipt:eq(4)').val().trim();
-            if (name_bank && name_user && stk && email && tinh) {
+            let sdt = $('.ipt:eq(4)').val().trim();
+           
+            let tinh = $('.ipt:eq(5)').val().trim();
+            if (name_bank && name_user && stk && email && sdt && tinh) {
                 $.ajax({
                     type: "POST",
                     url: "/api/webapi/addBank",
@@ -201,6 +210,8 @@
                         name_user: name_user,
                         stk: stk,
                         email: email,
+                        sdt: sdt,
+                       
                         tinh: tinh,
                     },
                     dataType: "json",

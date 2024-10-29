@@ -22,7 +22,6 @@
     <link href="/css/wallet/chunk-libs.aac02ba1.css" rel="stylesheet">
     <link href="/css/wallet/app.30ec9887.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/wallet/chunk-6e8d5c6e.0fc0ae11.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style type="text/css">
         @font-face {
             font-family: Roboto;
@@ -56,7 +55,7 @@
     </style>
 </head>
 
-<body style="background-color: rgb(255, 255, 255);">
+<body style="background-color: white;">
     <div>
         <div data-v-5f23d35a="" class="app-container">
             <div data-v-cbb7dde6="" data-v-5f23d35a="" class="app-container">
@@ -82,7 +81,7 @@
                             </div>
                         </div>
                         <div data-v-400f7872="" class="container-column info-amount-box"
-                            style="background: url('/images/back.png1'); ">
+                            style="background: url('/images/back.png');">
                             <div data-v-400f7872="" class="container-row info-amount-title-box">
                                 <div data-v-400f7872="" class="info-amount-title-box-text">Payment Amount</div>
                             </div>
@@ -100,7 +99,6 @@
                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAnBAMAAAB+jUwGAAAALVBMVEVHcEwGWv0FWv0FWv0FWv0GWv0GWv0FWv0FWv0FWv0GWv0GWv0GWv0EWvwEWv3t0LoKAAAADnRSTlMADBtC4H65zsVS7ZQuXsPJ7aYAAAEgSURBVCjPY2AAA8bZKeuWZE9kQAbMee/AIBlZrO5dqpGAkGneu2K4GOO+V0FgBlPUu40wQfV3gTDpuOcKEBaPnw9cE5yt8kIAYbzEE7BSxrpGJDsZ+wpBFPcTAWTXibwGkefeoDiZ550BkKwLgDhn5iSIaFwD0OGvwLp56969qwULSj1mYGB7ClbXB/JlE4jJ+oyBQe4R2Flgr4Odw/ROgGFeAkiwDxIgDSB23gSGfSB7eCFi796CbdrAkAdyATtU8DlI0C6BwQ9kjh5U8B2Y48CwDuQiO5ggSJvcAoZ3IB3zYIITgBy+B9hVYjUTq+1Y3YnVR1j9jjWUsIYn1pBnsMMWR1hjE2u8Y00h2NMS1lSHPX0yMPfBUnIzgTSPnjsAD1HOFUnUszgAAAAASUVORK5CYII="
                                     class="method-row-title-box-icon">
                             </div>
-                            <div id="qrcode" style="margin-top: 20px;"></div>
                             <div data-v-400f7872="" class="container-column method-row-upi-box">
                                 <div data-v-400f7872="" class="container-row method-row-upi-title-box">
                                     <div data-v-400f7872="" class="method-row-upi-title-box-title">1.Copy UPI
@@ -110,7 +108,7 @@
                                     <div data-v-400f7872="" id="idup" class="method-row-upi-value-box-title">
                                     </div><button data-v-400f7872="" onclick="copyToClipboard(idup)"
                                         class="container-row method-row-upi-box-btn">
-                                        <div data-v-400f7872="" style="color:#6bcbf1;"
+                                        <div data-v-400f7872="" style="color:#4cd964;"
                                             class="method-row-upi-box-btn-title">Copy</div>
                                     </button>
                                 </div>
@@ -399,7 +397,7 @@
                     alert("order id invalid");
                     window.location.href = "/wallet/recharge";
                 };
-                if (data.utr != 0 && null) {
+                if (data.utr != 0) {
                     alert("UTR already submitted for this order wait for verification");
                     window.location.href = "/wallet/recharge";
                 }
@@ -409,6 +407,7 @@
                 $('#amount').text('₹ ' + data.money);
                 $('.info .box .text:eq(4)').text(data.id_order);
             }
+
         });
 
         $('.submit').click(function (e) {
@@ -437,19 +436,7 @@
                 }
             });
         });
-    function generateQRCode(upiId) {
-        const qrcode = new QRCode(document.getElementById("qrcode"), {
-            text: `upi://pay?pa=${upiId}&pn=UPI Payment`,
-            width: 128,
-            height: 128,
-        });
-    }
 
-    setTimeout(()=>{
-        const upiIdElement = document.getElementById("idup");
-    const upiId = upiIdElement.innerText.trim();
-        generateQRCode(upiId);
-    },1000)
     </script>
 
 </body>
