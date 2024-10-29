@@ -1247,21 +1247,8 @@
   box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
 }
 </style>
-      
-                
-                
-                <!-- HTML !-->
 
-                
     <div data-v-2fa41a6b="" class="promote__cell">
-  
-     
-     
-     
-     
-     
-     
-     
 
      <div data-v-2fa41a6b="" onclick="location.href='/promotion/myteam'" class="promote__cell-item">
       <div data-v-2fa41a6b="" class="label">
@@ -1395,7 +1382,6 @@
         }
 
         });
-    });
 </script>
 <script>
     function RosesRender(datas) {
@@ -1441,12 +1427,12 @@
             $('#roses_f').text("Team Commission: " + response.invite.roses_f);
             $('#roses_all').text(response.invite.roses_all);
             $('#roses_today').text(response.invite.roses_today);
-            $('#invite_code').text(window.location.hostname + `/register?r_code=${response.info[0].code}`);
+            $('#invite_code').text(`https://`+ window.location.hostname + `/register?r_code=${response.info[0].code}`);
 
             if (response.status === false) return location.href = '/home';
             RosesRender(response.level);
             $('.btn-box .btn:eq(1)').attr('data-clipboard-text', response.info[0].code);
-            $('.btn-box .btn:eq(0)').attr('data-clipboard-text', window.location.hostname + `/register?r_code=${response.info[0].code}`);
+            $('.btn-box .btn:eq(0)').attr('data-clipboard-text',`https://`+ window.location.hostname + `/register?r_code=${response.info[0].code}`);
             var qrcode = new QRCode("qrcode");
             $('#qrcode').attr('title', window.location.hostname + `/register?r_code=${response.info[0].code}`)
             function makeCode() {
@@ -1727,7 +1713,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
-}
+
 .notifications {
   position: fixed;
   top: 30px;
@@ -1804,7 +1790,7 @@
 .toast.warning::before, .umra#warning {
   background: var(--warning);
 }
-.toast.infoo::before,  {
+.toast.infoo::before {
   background: blue;
 }
 
@@ -1836,7 +1822,7 @@
 .toast i:last-child:hover {
   color: var(--dark);
 }
-.
+
 
 
 @media screen and (max-width: 530px) {
@@ -1849,12 +1835,12 @@
     margin-left: 20px;
   }
 
+}
 
 
 
-
-<!-- HTML !-->
-<button class="button-62" role="button">Button 62</button>
+/* <!-- HTML !--> */
+/* <button class="button-62" role="button">Button 62</button> */
 
 /* CSS */
 </style>
@@ -1890,22 +1876,19 @@ const removeToast = (toast) => {
 }
 
 const createToast = (id) => {
-    // Getting the icon and text for the toast based on the id passed
     const { icon, text } = toastDetails[id];
-    const toast = document.createElement("li"); // Creating a new 'li' element for the toast
-    toast.className = `toast ${id}`; // Setting the classes for the toast
-    // Setting the inner HTML for the toast
+    const toast = document.createElement("li");
+    toast.className = `toast ${id}`;
     toast.innerHTML = `<div class="column">
                          <i class="fa-solid ${icon}"></i>
                          <span>${text}</span>
                       </div>
                       <i class="fa-solid fa-xmark" onclick="removeToast(this.parentElement)"></i>`;
-    notifications.appendChild(toast); // Append the toast to the notification ul
-    // Setting a timeout to remove the toast after the specified duration
+    notifications.appendChild(toast);
     toast.timeoutId = setTimeout(() => removeToast(toast), toastDetails.timer);
 }
 
-// Adding a click event listener to each button to create a toast when clicked
+
 buttons.forEach(umra => {
     umra.addEventListener("click", () => createToast(umra.id));
 });
