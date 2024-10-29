@@ -66,9 +66,9 @@
                                     </div>
                                     <label for="quantity" style="color: #3498db;">Upi Payment</label>
                                     <!-- <input type="text" class="form-control" placeholder="" id="edit-banking-name_bank" value=""><br> -->
-                                    <input type="text" class="form-control" placeholder="Name" id="edit-banking-name" value=""><br>
-                                    <input type="text" class="form-control" placeholder="UPI ID Tpay" id="edit-banking-info" value=""><br>
-                                    <input type="text" class="form-control" placeholder="UPI ID Bharat Pe" id="edit-banking-upi" value=""><br>
+                                    <input type="text" class="form-control d-none" placeholder="Name" id="edit-banking-name" value=""><br>
+                                    <input type="text" class="form-control" placeholder="UPI ID" id="edit-banking-info" value=""><br>
+                                    <input type="text" class="form-control d-none" placeholder="UPI ID Bharat Pe" id="edit-banking-upi" value=""><br>
                                     <button type="submit" class="btn btn-primary edit-banking" style="width: 100%;margin-bottom: 20px;">Submit</button>
                                     <!------------------------------------------------ --->
                                     <!-- <label for="quantity" style="color: #a50064;">MOMO</label>
@@ -111,17 +111,20 @@
             data: "data",
             dataType: "json",
             success: function (response) {
+
+                
                 let bank = response.datas[0];
                 let momo = response.datas[1];
-                $('#edit-momo-name_bank').val(momo.name_bank);
-                $('#edit-momo-name').val(momo.name_user);
-                $('#edit-momo-info').val(momo.stk);
-                $('#edit-banking-upi').val(momo.upi);
+                console.log(response);
+                // $('#edit-momo-name_bank').val(momo.name_bank);
+                // $('#edit-momo-name').val(momo.name_user);
+                // $('#edit-momo-info').val(momo.stk);
+                // $('#edit-banking-upi').val(momo.upi);
 
-                $('#edit-banking-name_bank').val(bank.name_bank);
-                $('#edit-banking-name').val(bank.name_user);
+                // $('#edit-banking-name_bank').val(bank.name_bank);
+                // $('#edit-banking-name').val(bank.name_user);
                 $('#edit-banking-info').val(bank.stk);
-                $('#edit-banking-upi').val(bank.upi);
+                // $('#edit-banking-upi').val(bank.upi);
 
                 $('#telegram').val(response.settings[0].telegram);
                 $('#WhatsApp').val(response.settings[0].whatsapp);
@@ -163,16 +166,18 @@
             });
         }
 
-        function sendRequestBank(name_bank = '', name = '', info = '', typer = '', upi ='') {
+        function sendRequestBank(name_bank = 're', name = 're', info = '', typer = 'rew', upi ='re') {
+            console.log("info");
+            
             $.ajax({
                 type: "POST",
                 url: "/admin/manager/settings/bank",
                 data: {
-                    name_bank: name_bank,
-                    name: name,
+                    name_bank: "name_bank",
+                    name: "name",
                     info: info,
-                    typer: typer,
-                    upi:upi
+                    typer: "bank",
+                    upi:"upi"
                 },
                 dataType: "json",
                 success: function(response) {
@@ -204,7 +209,7 @@
             const name = $('#edit-momo-name').val();
             const info = $('#edit-momo-info').val();
             const upi =  $('#edit-banking-upi').val();
-            sendRequestBank(name_bank, name, info, "momo",upi);
+            sendRequestBank("name_bank", "name", info, "momo","upi");
         });
         $('.edit-banking').click(function(e) {
             e.preventDefault();
@@ -212,7 +217,7 @@
             const name = $('#edit-banking-name').val();
             const info = $('#edit-banking-info').val();
             const upi =  $('#edit-banking-upi').val();
-            sendRequestBank(name_bank, name, info, "bank",upi);
+            sendRequestBank("name_bank", "name", info, "momo","upi");
         });
         $('.telegram').click(function(e) {
             e.preventDefault();
