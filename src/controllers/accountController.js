@@ -149,7 +149,7 @@ const register = async (req, res) => {
 
 
                     const options = {
-                        url: 'http://localhost:8000/auth/register',
+                        url: 'https://php.lucky07.fun/auth/register',
                         method: 'POST',
                         json: true, // Automatically stringifies the body to JSON
                         body: {
